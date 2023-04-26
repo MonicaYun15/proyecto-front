@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AppBaseComponent} from "../../../../core/utils/AppBaseComponent";
 import {AuthLoginRequestDto} from "../../../../core/dto/authLoginRequestDto";
 import {AuthService} from "../../../../core/services/auth.service";
+import {lastValueFrom} from "rxjs";
+import {TokenService} from "../../../../core/services/token.service";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,7 @@ export class LoginComponent extends AppBaseComponent {
    */
   public loginForm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {
+  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private tokenService: TokenService) {
     super();
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email] ],
@@ -27,7 +29,7 @@ export class LoginComponent extends AppBaseComponent {
   }
 
 
-  public signIn(): void {
+  public async signIn(): Promise<void> {
 
     let dtoLogin: AuthLoginRequestDto;
 
@@ -41,16 +43,17 @@ export class LoginComponent extends AppBaseComponent {
         password
       }
 
-      this.authService.signIn(dtoLogin).subscribe(value => {
-        console.log("voy a mostrarme despues")
-        console.log(value);
-      });
+      await lastValueFrom(this.authService.signIn(dtoLogin));
 
-      console.log("se va a mostrar antes que el subscribe");
+      console.log(this.tokenService.getToken());
+
+      await this.router.navigateByUrl("/portafolio");
+
 
     } else {
       alert("hay errores en el formulario")
       console.log(this.getAllErrorsForm(this.loginForm));
+      this.loginForm.markAllAsTouched();
     }
 
   }
