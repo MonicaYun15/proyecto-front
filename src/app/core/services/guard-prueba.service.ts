@@ -12,10 +12,10 @@ export class GuardPruebaService {
   public canActiveWithAuth(): boolean {
     if (this.tokenService.getToken()) {
       this.router.navigateByUrl("/portafolio");
-      return true;
+      return false;
     }
 
-    return false;
+    return true;
   }
 
   public canActiveWithoutAuth(): boolean {

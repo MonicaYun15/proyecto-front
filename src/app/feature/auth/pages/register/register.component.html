@@ -22,51 +22,55 @@
             ">
           <div class="card-body p-5 shadow-5 text-center">
             <h2 class="fw-bold mb-5">Registro de usuario</h2>
-            <form>
+            <form role="form" [formGroup]="registerForm" *ngIf="registered == false">
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row">
-                <div class="col-md-6 mb-4">
+                <div class="col-md-12 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="form3Example1" class="form-control" />
-                    <label class="form-label" for="form3Example1">First name</label>
+                    <label class="form-label" for="form3Example1">Numero de identificacion</label>
+                    <input formControlName="cardId" type="text" id="form3Example2" class="form-control" />
+                    <span class="text-danger">{{getErrorForm('cardId')}}</span>
                   </div>
-                </div>
-                <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="form3Example2" class="form-control" />
-                    <label class="form-label" for="form3Example2">Last name</label>
+                    <label class="form-label" for="form3Example1">Full name</label>
+                    <input formControlName="fullName" type="text" id="form3Example1" class="form-control" />
+                    <span class="text-danger">{{getErrorForm('fullName')}}</span>
                   </div>
                 </div>
               </div>
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
                 <label class="form-label" for="form3Example3">Email address</label>
+                <input formControlName="email" type="email" id="form3Example3" class="form-control" />
+                <span class="text-danger">{{getErrorForm('email')}}</span>
               </div>
 
-              <!-- Password input -->
+              <!-- Cellphone input -->
               <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Password</label>
+                <label class="form-label" for="form3Example3">Number cellphone</label>
+                <input formControlName="numberCellphone" type="email" id="form3Example6" class="form-control" />
+                <span class="text-danger">{{getErrorForm('numberCellphone')}}</span>
               </div>
+
 
               <!-- Checkbox -->
               <div class="form-check d-flex justify-content-center mb-4">
                 <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
                 <label class="form-check-label" for="form2Example33">
-                  Subscribe to our newsletter
+                  Acepto términos y condiciones
                 </label>
               </div>
 
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
-                Sign up
+              <button (click)="register()" type="submit" class="btn btn-primary btn-block mb-4">
+                Registrase
               </button>
 
               <!-- Register buttons -->
               <div class="text-center">
-                <p>or sign up with:</p>
+                <p>Si ya te encuentras registrado:</p>
+                <a routerLink="../inicio-sesion">da click aqui</a>
                 <button type="button" class="btn btn-link btn-floating mx-1">
                   <i class="fab fa-facebook-f"></i>
                 </button>
@@ -84,12 +88,19 @@
                 </button>
               </div>
             </form>
+            <div *ngIf="registered == true">
+              <p>Registro existoso, su contraseña predeterminada es:</p>
+              <h3>{{passwordGenerated}}</h3>
+              <p>Guardela en un lugar seguro y recuerdela, no la puede recuperar.</p>
+              <p>Puedes iniciar sesión:</p>
+              <a routerLink="../inicio-sesion">Aquí</a>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="col-lg-6 mb-5 mb-lg-0">
-        <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
+        <img src="https://st1.uvnimg.com/d1/f3/8e7325e64441883e4c135a61dddd/los-mejores-carros-2022.jpg" class="w-100 rounded-4 shadow-4"
              alt="" />
       </div>
     </div>

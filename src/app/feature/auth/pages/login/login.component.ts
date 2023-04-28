@@ -6,6 +6,7 @@ import {AuthLoginRequestDto} from "../../../../core/dto/authLoginRequestDto";
 import {AuthService} from "../../../../core/services/auth.service";
 import {lastValueFrom} from "rxjs";
 import {TokenService} from "../../../../core/services/token.service";
+import {ErrorsForm} from "../../../../core/enums/ErrorsForm";
 
 @Component({
   selector: 'app-login',
@@ -62,14 +63,18 @@ export class LoginComponent extends AppBaseComponent {
     this.router.navigateByUrl("autenticacion/registro"); //navegacion mediante la clase Router
   }*/
 
+  /**
+   * Retorna mensaje de error de un campo del formulario
+   * @param field
+   */
   public getErrorForm(field: string): string {
     let message;
 
     if (this.isTouchedField(this.loginForm, field)) {
       if (this.loginForm.get(field).hasError('required')){
-        message = 'El campo es requerido';
+        message = ErrorsForm.REQUIRED;
       } else if (this.loginForm.get(field).hasError('email')) {
-        message = 'Requiere el formato de email';
+        message = ErrorsForm.EMAIL_FORMAT;
       }
     }
 

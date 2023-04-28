@@ -5,6 +5,8 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment.development";
 import {AuthLoginResponseDto} from "../dto/authLoginResponseDto";
 import {TokenService} from "./token.service";
+import {RegisterRequestDto} from "../dto/registerRequestDto";
+import {RegisterResponseDto} from "../dto/registerResponseDto";
 const { apiUrl } = environment;
 
 @Injectable({
@@ -23,5 +25,9 @@ export class AuthService {
           this.tokenService.saveToken(response.jwt);
         })
       );
+  }
+
+  public register(registerDto: RegisterRequestDto): Observable<RegisterResponseDto> {
+    return this.http.post<RegisterResponseDto>(`${apiUrl}/auth/register`, registerDto);
   }
 }
