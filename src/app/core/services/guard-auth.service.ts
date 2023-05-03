@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import {CanActivateFn, Router} from "@angular/router";
+import {Injectable} from '@angular/core';
+import {Router} from "@angular/router";
 import {TokenService} from "./token.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class GuardPruebaService {
+export class GuardAuthService {
 
   constructor(private tokenService: TokenService, private router: Router) { }
 
