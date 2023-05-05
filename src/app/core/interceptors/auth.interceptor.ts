@@ -3,10 +3,11 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {catchError, Observable, throwError} from 'rxjs';
 import {TokenService} from "../services/token.service";
+import Swal from 'sweetalert2'
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -18,23 +19,34 @@ export class AuthInterceptor implements HttpInterceptor {
 
     let headers;
 
-    let token = this.tokenService.getToken()
+    let token = this.tokenService.getToken();
 
-    if (token) {
-
-      headers = {
-        'Authorization': 'Bearer '+token,
-        'Access-Control-Allow-Origin': '*'
-      }
-
-      let authRequest = request.clone({
-        setHeaders: {
-          ...headers
-        }
-      });
-      console.log(authRequest)
-      return next.handle(authRequest);
+    if (!token) {
+      return next.handle(request);
     }
-    return next.handle(request);
+
+    headers = {
+      'Authorization': 'Bearer '+token
+    }
+
+    let authRequest = request.clone({
+      setHeaders: {
+        ...headers
+      },
+    });
+
+    console.log(authRequest)
+    return next.handle(authRequest).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 403) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No tienes permisos para acceder a ésta página.'
+          })
+        }
+        return throwError(() => err);
+      })
+    );
   }
 }
