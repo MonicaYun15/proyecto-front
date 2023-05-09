@@ -1,0 +1,76 @@
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start">
+  <style>
+    .cascading-right {
+      margin-right: -50px;
+    }
+
+    @media (max-width: 991.98px) {
+      .cascading-right {
+        margin-right: 0;
+      }
+    }
+  </style>
+
+  <!-- Jumbotron -->
+  <div class="container py-4">
+    <div class="row g-0 align-items-center">
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div class="card cascading-right" style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);
+            ">
+          <div class="card-body p-5 shadow-5 text-center">
+            <form role="form" [formGroup]="infoMechForm">
+
+
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example4">Caballos de fuerza</label>
+                <input formControlName="horsepower"
+                       type="number" id="form3Example4" class="form-control" placeholder="NUmero caballos de fuerza"/>
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example5">Cilindraje</label>
+                <input formControlName="engineDisplacement"
+                       type="number" id="form3Example5" class="form-control" placeholder="Cilindraje CC"/>
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example6">Transmisión</label>
+                <input formControlName="transmission"
+                       type="text" id="form3Example6" class="form-control" placeholder="Transmisión"/>
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example7">Tipo de combustible</label>
+                <input formControlName="fuelType"
+                       type="text" id="form3Example7" class="form-control" placeholder="Tipo combustible"/>
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example8">Tracción</label>
+                <input formControlName="traction"
+                       type="number" id="form3Example8" class="form-control" placeholder="NUmero de traccion"/>
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example9">Dirección</label>
+                <input formControlName="steering"
+                       type="text" id="form3Example9" class="form-control" placeholder="Dirección"/>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
+
+
+
+
