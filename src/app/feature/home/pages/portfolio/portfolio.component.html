@@ -2,6 +2,19 @@
   <app-header-nav></app-header-nav>
 </header>
 
-<p>portfolio works!</p>
-
-<p *ngFor="let car of listCarsPortfolio">{{car.reference}}</p>
+<div class="card" *ngFor="let car of listCarsPortfolio">
+  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+    <img src="{{car.imagePath}}" alt="image-car"/>
+    <a href="#!">
+      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+    </a>
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">Referencia: {{car.reference}}</h4>
+    <h5 class="card-title">Marca: {{car.brandCarString}}</h5>
+    <h6 class="card-title">A tan solo: {{car.price}}</h6>
+    <p class="card-text">Unidades limitadas: {{car.stock}}</p>
+    <button class="btn btn-info" *ngIf="car.stock != 0" (click)="addCarShoppingCart(car)">Agregar al carrito</button>
+    <button class="btn btn-danger" *ngIf="car.stock != 0" (click)="deleteCarShoppingCart(car)">Eliminar del carrito</button>
+  </div>
+</div>

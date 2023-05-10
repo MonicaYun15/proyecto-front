@@ -16,4 +16,5 @@ export interface CarDto {
   steering: string;
   category: string;
   imagePath: string;
+  stock: number;
 }

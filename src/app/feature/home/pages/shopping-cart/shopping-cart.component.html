@@ -1,0 +1,25 @@
+<div *ngIf="purchaseSaved == false">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Codigo coche</th>
+      <th scope="col">Cantidad unidades</th>
+      <th scope="col">Total</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr class="table-success" *ngFor="let car of listCarsPurchase">
+      <td>{{car.codeCar}}</td>
+      <td>{{car.quantity}}</td>
+      <td>{{car.total}}</td>
+    </tr>
+
+    </tbody>
+  </table>
+
+  <button type="button" class="btn btn-info" (click)="registerPurchase()">Registrar compra</button>
+</div>
+
+<h1 *ngIf="purchaseSaved == true">Tu código de factura es: {{numberBill}}. Guardalo por favor</h1>
