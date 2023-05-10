@@ -5,12 +5,12 @@ import {GuardAuthService} from "../core/services/guard-auth.service";
 const routes: Routes = [
   {
     path: "autenticacion",
-    canActivate: [() => inject(GuardAuthService).canActiveWithAuth()],
+    canActivate: [() => inject(GuardAuthService).canActiveLogin()],
     loadChildren: () => import("./auth/auth.module").then(a => a.AuthModule)
   },
   {
     path: "portafolio",
-    canActivate: [() => inject(GuardAuthService).canActiveWithoutAuth()],
+    canActivate: [() => inject(GuardAuthService).canActiveWithAuth()],
     loadChildren: () => import("./home/home.module").then(a => a.HomeModule)
   },
   {

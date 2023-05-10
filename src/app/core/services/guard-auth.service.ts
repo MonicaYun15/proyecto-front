@@ -10,7 +10,10 @@ export class GuardAuthService {
 
   constructor(private tokenService: TokenService, private router: Router) { }
 
-  public canActiveWithAuth(): boolean {
+  /**
+   * Guardian que redirige a las paginas respectivas de su rol si se encuentra logueado e intenta loguearse de nuevo
+   */
+  public canActiveLogin(): boolean {
     if (this.tokenService.getToken()) {
       this.router.navigateByUrl("/portafolio");
       return false;
@@ -19,7 +22,10 @@ export class GuardAuthService {
     return true;
   }
 
-  public canActiveWithoutAuth(): boolean {
+  /**
+   * Guardian que permite acceder a una pagina si se encuentra logueado
+   */
+  public canActiveWithAuth(): boolean {
     if (!this.tokenService.getToken()) {
       alert("no tienes permisos");
       this.router.navigateByUrl("/autenticacion/inicio-sesion");
@@ -31,7 +37,7 @@ export class GuardAuthService {
 
   public canActiveWithRolAdmin(): boolean {
 
-    if (this.tokenService.getInfoToken().rol != Roles.ADMIN && !this.canActiveWithoutAuth()) {
+    if (this.tokenService.getInfoToken().rol != Roles.ADMIN && !this.canActiveWithAuth()) {
       alert("no tienes permisos");
       this.router.navigateByUrl("/autenticacion/inicio-sesion");
       return false;
