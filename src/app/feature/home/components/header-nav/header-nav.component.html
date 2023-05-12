@@ -36,6 +36,9 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="../portafolio/carrito">Carrito de compras</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="../portafolio/historial-compras">Historial de compras</a>
+        </li>
       </ul>
 
       <div class="container text-end">
@@ -60,14 +63,14 @@
       <div class="dropdown">
         <a
           class="text-reset me-3 dropdown-toggle hidden-arrow"
-          href="#"
+          routerLink="../portafolio/carrito"
           id="navbarDropdownMenuLink"
           role="button"
           data-mdb-toggle="dropdown"
           aria-expanded="false"
         >
           <i class="fas fa-bell"></i>
-          <span class="badge rounded-pill badge-notification bg-danger">1</span>
+          <span class="badge rounded-pill badge-notification bg-danger">{{numberProducts}}</span>
         </a>
         <ul
           class="dropdown-menu dropdown-menu-end"

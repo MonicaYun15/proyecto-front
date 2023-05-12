@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CarService} from "../../../../core/services/car.service";
 import {CarDto} from "../../../../core/dto/carDto";
 import {CarsPurchaseDto} from "../../../../core/dto/carsPurchaseDto";
@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css']
 })
-export class PortfolioComponent {
+export class PortfolioComponent implements OnInit {
 
   /**
    * Lista de carros del concesionario
@@ -19,13 +19,17 @@ export class PortfolioComponent {
   public carsPurchase: Array<CarsPurchaseDto>;
 
   constructor(private carService: CarService) {
-    this.carsPurchase = [];
     this.carService.getAllCars().subscribe({
       next: value => {
         this.listCarsPortfolio = value;
         console.log(this.listCarsPortfolio)
       }
     })
+
+  }
+
+  ngOnInit(): void {
+    this.carsPurchase = JSON.parse(localStorage.getItem("carsPurschase")) ? JSON.parse(localStorage.getItem("carsPurschase")): [];
   }
 
   /**
@@ -67,6 +71,7 @@ export class PortfolioComponent {
     }
 
     localStorage.setItem('carsPurschase', JSON.stringify(this.carsPurchase));
+    this.carService.setNumberProducts();
   }
 
   /**
@@ -101,6 +106,9 @@ export class PortfolioComponent {
     }
 
     localStorage.setItem('carsPurschase', JSON.stringify(this.carsPurchase));
+    this.carService.setNumberProducts();
   }
+
+
 
 }

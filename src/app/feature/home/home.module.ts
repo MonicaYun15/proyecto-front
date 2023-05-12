@@ -5,13 +5,15 @@ import { HomeRoutingModule } from './home-routing.module';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { HeaderNavComponent } from './components/header-nav/header-nav.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
+import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 
 
 @NgModule({
   declarations: [
     PortfolioComponent,
     HeaderNavComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    PurchaseHistoryComponent
   ],
   imports: [
     CommonModule,

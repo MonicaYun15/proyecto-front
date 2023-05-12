@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenService} from "../../../../core/services/token.service";
+import {Subscription} from "rxjs";
+import {CarService} from "../../../../core/services/car.service";
 
 @Component({
   selector: 'app-header-nav',
@@ -13,10 +15,17 @@ export class HeaderNavComponent {
 
   public emailCustomer: string;
 
+  public numberProducts: number = 0;
 
-  constructor(private tokenService: TokenService) {
+  public subscriptionNumber: Subscription;
+
+  constructor(private tokenService: TokenService, private carService: CarService) {
     this.nameCustomer = this.tokenService.getInfoToken().fullname;
     this.emailCustomer = this.tokenService.getInfoToken().email;
+
+    this.subscriptionNumber = this.carService.getNumberProducts.subscribe({
+      next: value => this.numberProducts = value
+    })
   }
 
 }
