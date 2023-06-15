@@ -27,8 +27,6 @@ FROM nginxinc/nginx-unprivileged
 #### copy artifact build from the 'build environment'
 COPY --from=build /app/dist/coches-curso-front /usr/share/nginx/html
 
-# Expone el puerto en el que la aplicación está escuchando
-EXPOSE 4200
 
 #### don't know what this is, but seems cool and techy
 CMD ["nginx", "-g", "daemon off;"]
