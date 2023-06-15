@@ -25,7 +25,7 @@ FROM nginxinc/nginx-unprivileged
 #COPY nginx.conf /etc/nginx/nginx.conf
 
 #### copy artifact build from the 'build environment'
-COPY --from=build /app/dist/tramite-aut-titulos-front /usr/share/nginx/html
+COPY --from=build /app/dist/coches-curso-front /usr/share/nginx/html
 
 #### don't know what this is, but seems cool and techy
 CMD ["nginx", "-g", "daemon off;"]
