@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: "https://lmbackend-production.up.railway.app"
+  apiUrl: "https://localhost:8080/api"
 };
